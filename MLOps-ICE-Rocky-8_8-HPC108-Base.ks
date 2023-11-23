@@ -35,8 +35,13 @@ user --name=root --password=passwort
 %packages
 @core
 kexec-tools
+firewalld
+openssh-server
 %end
 
 %post
 # Additional post-installation commands, if needed
+
+# Schedule a reboot after installation
+reboot
 %end
