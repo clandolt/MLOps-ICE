@@ -6,7 +6,7 @@ lang en_US.UTF-8
 keyboard us
 
 # Swiss German keyboard layout without dead keys
-preseed keyboard-configuration/xkb-keymap select ch sg
+# preseed keyboard-configuration/xkb-keymap select ch sg
 
 # Installation information
 url --url="https://download.rockylinux.org/stg/rocky/8/BaseOS/$basearch/os/"
