@@ -28,14 +28,12 @@ selinux --enforcing
 user --name=root --password=passwort
 
 # System services
-services --enabled="NetworkManager,sshd"
+services --enabled="sshd"
 
 # Packages and installation
 %packages
 @core
 kexec-tools
-NetworkManager
-firewalld
 %end
 
 %post
