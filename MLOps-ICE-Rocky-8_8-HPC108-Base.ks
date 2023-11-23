@@ -38,6 +38,7 @@ services --enabled="NetworkManager,sshd"
 %packages
 @core
 kexec-tools
+NetworkManager
 firewalld
 %end
 
