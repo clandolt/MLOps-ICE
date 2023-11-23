@@ -31,12 +31,14 @@ selinux --enforcing
 # Root user setup
 user --name=root --password=passwort
 
+# System services
+services --enabled="NetworkManager,sshd"
+
 # Packages and installation
 %packages
 @core
 kexec-tools
 firewalld
-openssh-server
 %end
 
 %post
