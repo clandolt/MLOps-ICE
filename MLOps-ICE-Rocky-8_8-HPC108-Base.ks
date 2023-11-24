@@ -1,25 +1,34 @@
-# Kickstart file for Rocky Linux
+# Kickstart file for Rocky Linux 8
 #version=DEVEL
 
-# System settings
+# GUI/TUI: Use textual install
+text
+
+# System Language
 lang en_US.UTF-8
-keyboard us
+
+# Keyboard Layout: Swiss German
+keyboard --vckeymap=ch --xlayouts='ch'
 
 # Swiss German keyboard layout without dead keys
 # preseed keyboard-configuration/xkb-keymap select ch sg
 
-# Installation information
-url --url="https://download.rockylinux.org/stg/rocky/8/BaseOS/$basearch/os/"
+# Installation Media: Use CDROM installation media
+cdrom
 
-# System timezone Zuerich
-timezone Europe/Zurich --isUtc
+# System Timezone
+timezone Europe/Zurich --utc
 
 # Network configuration
-network --bootproto=static --ip=146.136.15.208 --netmask=255.255.252.0 --gateway=146.136.15.1 --nameserver=152.96.48.12 --nameserver=146.136.48.11 --hostname=hpc108.ost.ch
+# Network: Set Hostname
+network --hostname=hpc108.ost.ch
+network --bootproto=static --device=eth0 --ip=146.136.15.208 --netmask=255.255.252.0 --gateway=146.136.15.1 --nameserver=152.96.48.12 --nameserver=146.136.48.11 --ipv6=auto --activate
+
+# Run the Setup Agent on first boot
+firstboot --enable
 
 # Firewall configuration
 firewall --enabled --service=ssh
-firstboot --disable
 
 # SELinux configuration
 selinux --enforcing
@@ -29,6 +38,17 @@ user --name=root --password=passwort
 
 # System services
 services --enabled="sshd"
+
+ignoredisk --only-use=vda,nvme0n1
+
+# Partition clearing information
+clearpart --none --initlabel
+
+# System bootloader configuration
+bootloader --append=" crashkernel=auto" --location=mbr --boot-drive=vda
+
+# Disk: Automatic Partitioning
+autopart --type=lvm
 
 # Packages and installation
 %packages
